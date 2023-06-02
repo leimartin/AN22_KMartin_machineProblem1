@@ -11,7 +11,7 @@ function calculateStudentAverage(grades) {
   return grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
 }
 
-function computeLetterGrade(grade) {
+function getLetterGrade(grade) {
   if (grade >= 90) {
     return 'A';
   } else if (grade >= 80 && grade < 90) {
@@ -30,12 +30,12 @@ function calculateStudentGrades() {
   
   for (let i = 1; i <= 5; i++) {
     // student's name
-    const name = prompt(`Enter the name of the student:`);
+    let name = prompt(`Enter the name of the student:`);
 
     // get Enabling Assessments
     const enablingGrades = [];
     for (let j = 1; j <= 5; j++) {
-      const myEnablingGrade = parseFloat(prompt(`Enter Enabling Assessment ${j}:`));
+      let myEnablingGrade = parseFloat(prompt(`Enter Enabling Assessment ${j}:`));
       enablingGrades.push(myEnablingGrade);
     }
     const classParticipation = calculateStudentAverage(enablingGrades);
@@ -43,17 +43,17 @@ function calculateStudentGrades() {
     // get Summative Assessments
     const summativeGrades = [];
     for (let k = 1; k <= 3; k++) {
-      const mySummativeGrade = parseFloat(prompt(`Enter Summative Assessment ${k}:`));
+      let mySummativeGrade = parseFloat(prompt(`Enter Summative Assessment ${k}:`));
       summativeGrades.push(mySummativeGrade);
     }
     const summativeGrade = calculateStudentAverage(summativeGrades);
 
     // get Final Grade
-    const finalExamGrade = parseFloat(prompt(`Enter Final Examination grade:`));
+    let finalExamGrade = parseFloat(prompt(`Enter Final Examination grade:`));
 
     // overall && letter grade
     const overallGrade = Math.ceil((classParticipation * 0.3) + (summativeGrade * 0.3) + (finalExamGrade * 0.4));
-    const letterGrade = computeLetterGrade(overallGrade);
+    const letterGrade = getLetterGrade(overallGrade);
 
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -64,7 +64,7 @@ function calculateStudentGrades() {
       <td>${overallGrade.toFixed(0)}</td>
       <td>${letterGrade}</td>
     `;
-    resultsTable.appendChild(row);
+    studentResultsTable.appendChild(row);
   }
 }
 
