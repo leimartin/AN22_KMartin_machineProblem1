@@ -29,34 +29,39 @@ function calculateStudentGrades() {
   const studentResultsTable = document.getElementById('studentResultsTable');
   
   for (let i = 1; i <= 5; i++) {
-    const name = prompt(`Enter student ${i} name:`);
+    // student's name
+    const name = prompt(`Enter the name of the student:`);
 
+    // get Enabling Assessments
     const enablingGrades = [];
     for (let j = 1; j <= 5; j++) {
-      const enablingGrade = parseFloat(prompt(`Enter Enabling Assessment ${j} for ${name}:`));
-      enablingGrades.push(enablingGrade);
+      const myEnablingGrade = parseFloat(prompt(`Enter Enabling Assessment ${j}:`));
+      enablingGrades.push(myEnablingGrade);
     }
     const classParticipation = calculateStudentAverage(enablingGrades);
 
+    // get Summative Assessments
     const summativeGrades = [];
     for (let k = 1; k <= 3; k++) {
-      const summativeGrade = parseFloat(prompt(`Enter Summative Assessment ${k} for ${name}:`));
-      summativeGrades.push(summativeGrade);
+      const mySummativeGrade = parseFloat(prompt(`Enter Summative Assessment ${k}:`));
+      summativeGrades.push(mySummativeGrade);
     }
     const summativeGrade = calculateStudentAverage(summativeGrades);
 
-    const finalExamGrade = parseFloat(prompt(`Enter Final Examination grade for ${name}:`));
+    // get Final Grade
+    const finalExamGrade = parseFloat(prompt(`Enter Final Examination grade:`));
 
-    const overallGrade = (classParticipation + summativeGrade + finalExamGrade) / 3;
+    // overall && letter grade
+    const overallGrade = Math.ceil((classParticipation * 0.3) + (summativeGrade * 0.3) + (finalExamGrade * 0.4));
     const letterGrade = computeLetterGrade(overallGrade);
 
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${name}</td>
-      <td>${classParticipation.toFixed(2)}</td>
-      <td>${summativeGrade.toFixed(2)}</td>
-      <td>${finalExamGrade.toFixed(2)}</td>
-      <td>${overallGrade.toFixed(2)}</td>
+      <td>${classParticipation.toFixed(0)}</td>
+      <td>${summativeGrade.toFixed(0)}</td>
+      <td>${finalExamGrade.toFixed(0)}</td>
+      <td>${overallGrade.toFixed(0)}</td>
       <td>${letterGrade}</td>
     `;
     resultsTable.appendChild(row);
