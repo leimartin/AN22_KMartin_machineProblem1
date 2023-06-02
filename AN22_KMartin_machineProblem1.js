@@ -31,11 +31,13 @@ function calculateStudentGrades() {
   for (let i = 1; i <= 5; i++) {
     // student's name
     let name = prompt(`Enter the name of the student:`);
+    console.log("Name of Student:", name)
 
     // get Enabling Assessments
     const enablingGrades = [];
     for (let j = 1; j <= 5; j++) {
       let myEnablingGrade = parseFloat(prompt(`Enter Enabling Assessment ${j}:`));
+      console.log(`Enabling Assessment ${j}:`, myEnablingGrade)
       enablingGrades.push(myEnablingGrade);
     }
     const classParticipation = calculateStudentAverage(enablingGrades);
@@ -44,16 +46,20 @@ function calculateStudentGrades() {
     const summativeGrades = [];
     for (let k = 1; k <= 3; k++) {
       let mySummativeGrade = parseFloat(prompt(`Enter Summative Assessment ${k}:`));
+      console.log(`Summative Assessment ${k}: `, mySummativeGrade)
       summativeGrades.push(mySummativeGrade);
     }
     const summativeGrade = calculateStudentAverage(summativeGrades);
 
     // get Final Grade
     let finalExamGrade = parseFloat(prompt(`Enter Final Examination grade:`));
+    console.log("Major Exam: ", finalExamGrade)
 
     // overall && letter grade
     const overallGrade = Math.ceil((classParticipation * 0.3) + (summativeGrade * 0.3) + (finalExamGrade * 0.4));
     const letterGrade = getLetterGrade(overallGrade);
+    console.log(`Grade Score: ${overallGrade}`)
+    console.log(`Letter Grade: ${letterGrade}`)
 
     const row = document.createElement('tr');
     row.innerHTML = `
